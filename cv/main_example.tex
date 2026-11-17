@@ -1,169 +1,135 @@
-%% Example CV - [YOUR_NAME]
-%% Comprehensive overview of all competencies, experience, and achievements.
-%% Use as a master reference when tailoring role-specific CVs.
-%%
-%% SETUP: Run /setup to populate this with your actual information.
-%% Compile with: lualatex main_example.tex
-%% (pdflatex often fails on modern MiKTeX with fontawesome5 font-expansion errors.)
+%% Master CV - Whoopie Wanja Wanjiru
+%% Full professional history. Compile with: lualatex main_example.tex
 
 \documentclass[11pt,a4paper,sans]{moderncv}
 \moderncvstyle{banking}
 \moderncvcolor{blue}
 
-% Force both first and last name AND section headings to render in moderncv
-% blue (color1). Default banking on lualatex+MiKTeX leaves these black, which
-% looks inconsistent with the rest of the blue accent scheme.
 \renewcommand*{\firstnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
 \renewcommand*{\lastnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
 \renewcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
 
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=blue,
-    pdftitle={[YOUR_NAME] - CV},
-    pdfpagemode=FullScreen,
-}
-\usepackage[scale=0.80]{geometry}
-\usepackage{import}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,pdftitle={Whoopie Wanjiru - CV}}
+\usepackage[scale=0.75]{geometry}
+\usepackage{needspace}
 
-% personal data
-\name{[First]}{[Last]}
-\address{[Your Address, City, Country]}{}{}
-\phone[mobile]{[+XX XXXXXXXXXX]}
-\email{[your.email@example.com]}
-\extrainfo{\href{[https://linkedin.com/in/your-profile]}{LinkedIn}, \href{[https://github.com/your-username]}{GitHub}}
+\name{Whoopie}{Wanjiru}
+\address{Nairobi, Kenya / Rwanda}{East Africa (EAT)}{}
+\phone[mobile]{(+254) 707-633-276 / (+250) 792-625-031}
+\email{wwanjiru@andrew.cmu.edu}
+\extrainfo{\href{https://www.linkedin.com/in/whoopie}{LinkedIn}, \href{https://github.com/WanjaWhoopie}{GitHub}}
 
 \begin{document}
-
 \makecvtitle
 
-% ============================================================
-%     PROFILE STATEMENT
-% ============================================================
-
-\vspace{6pt}
-\small{[Write a 3-5 line profile statement tailored to the role you're applying for. Focus on what makes you uniquely qualified. Example: "Data scientist with a PhD in [field] and X years of industry experience. Combines deep domain expertise in [domain] with strong applied machine learning and Python development skills. Experienced in developing end-to-end ML pipelines, from data ingestion to stakeholder-facing dashboards."]}
-
-% ============================================================
-%     CORE COMPETENCIES
-% ============================================================
+\vspace{4pt}
+\small{MSc Engineering AI candidate at Carnegie Mellon with 4+ years of professional experience across data science, health informatics, software engineering, and technical mentoring since 2021. Skilled in end-to-end ML, NLP/LLMs, Spark big-data workflows, and production analytics on national-scale health platforms.}
 
 \section{Core Competencies}
 \vspace{1pt}
 \begin{itemize}
-
-\item \textbf{[Skill Category 1]}: [Specific skills, frameworks, tools. Be concrete.]
-
-\item \textbf{[Skill Category 2]}: [Specific skills, frameworks, tools.]
-
-\item \textbf{[Skill Category 3]}: [Specific skills, frameworks, tools.]
-
-\item \textbf{[Skill Category 4]}: [Domain expertise, methods, approaches.]
-
-\item \textbf{[Skill Category 5]}: [Tools, platforms, software.]
-
+\item \textbf{ML \& Data Science:} Scikit-learn, TensorFlow, PyTorch, predictive modeling, NLP, RAG, ensemble methods, Spark MLlib
+\item \textbf{Health \& Analytics:} Clinical data pipelines, trend analysis, dashboards (Looker Studio), health platform operations
+\item \textbf{Engineering:} Python, SQL, Git, REST APIs, software testing, Docker, MLOps tooling
+\item \textbf{Leadership:} Technical mentoring, coding instruction, cross-functional stakeholder communication
 \end{itemize}
-
-% ============================================================
-%     PROFESSIONAL EXPERIENCE
-% ============================================================
 
 \section{Professional Experience}
-\vspace{3pt}
+\vspace{2pt}
 \begin{itemize}
 
-% --- Most Recent Role ---
-\item{\cventry{[YYYY--Present]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{Jun 2026--Present}{Graduate Research Assistant}{Carnegie Mellon University}{Remote}{}{
 \begin{itemize}
-    \item [Achievement or responsibility 1 - be specific, use numbers where possible]
-    \item [Achievement or responsibility 2]
-    \item [Achievement or responsibility 3]
-    \item [Achievement or responsibility 4]
+    \item NLP for low-resource African languages; Knowledge Graph + RAG for digital health and NCDs
 \end{itemize}}}
 
-\vspace{3pt}
-
-% --- Previous Role ---
-\item{\cventry{[YYYY--YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{Jan 2026--May 2026}{Graduate Teaching Assistant, Big Data}{Carnegie Mellon University}{Pittsburgh, USA}{}{
 \begin{itemize}
-    \item [Achievement or responsibility 1]
-    \item [Achievement or responsibility 2]
-    \item [Achievement or responsibility 3]
+    \item Spark/HDFS/MapReduce labs; optimized student pipeline jobs and lab materials
 \end{itemize}}}
 
-\vspace{3pt}
-
-% --- Earlier Role ---
-\item{\cventry{[YYYY--YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{Dec 2024--Jul 2025}{Analyst}{Savannah Informatics}{Nairobi, Kenya}{}{
 \begin{itemize}
-    \item [Achievement or responsibility 1]
-    \item [Achievement or responsibility 2]
+    \item Python/Looker pipelines on 25M+ user health platform; 10\% reliability gain; 20\% adoption increase via data literacy training
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{Jan 2025--Apr 2025}{Data Scientist (Volunteer)}{Omdena}{Remote}{}{
+\begin{itemize}
+    \item NLP for medical prescription and information extraction
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{Mar 2024--Dec 2024}{Business Development Representative}{Sensible}{Remote (USA)}{}{
+\begin{itemize}
+    \item Stakeholder-facing technology role; client communication and product positioning
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{Mar 2023--Nov 2023}{Technical Mentor, Data}{Zindua School}{Nairobi, Kenya}{}{
+\begin{itemize}
+    \item Mentored learners in data skills and technical problem-solving
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{May 2023--Oct 2023}{Coding Instructor}{Nice Place Foundation}{Kajiado, Kenya}{}{
+\begin{itemize}
+    \item Delivered coding and technical training programs
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{Dec 2022--Jun 2023}{Service Support Specialist}{KESRA}{Nairobi, Kenya}{}{
+\begin{itemize}
+    \item Institutional service support and operational troubleshooting
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{Mar 2022--Jun 2022}{Software Test Engineer}{Techno Brain Group}{Nairobi, Kenya}{}{
+\begin{itemize}
+    \item Software testing, usability validation, QA
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{Aug 2021--Mar 2022}{Data Scientist}{AICE Africa}{Nairobi, Kenya}{}{
+\begin{itemize}
+    \item Applied data science and ML in African AI/education context
+\end{itemize}}}
+
+\needspace{5\baselineskip}
+\item{\cventry{Oct 2020--Sep 2021}{Software Engineer}{Waape}{Kampala, Uganda}{}{
+\begin{itemize}
+    \item Software engineering on remote-work platform; published on freelancing in Africa
 \end{itemize}}}
 
 \end{itemize}
 
-% ============================================================
-%     EDUCATION
-% ============================================================
+\section{Selected Projects}
+\vspace{2pt}
+\begin{itemize}
+\item \textbf{ASD Clinical Classification:} 93\% ensemble accuracy (Python, Scikit-learn)
+\item \textbf{Multi-Agent Scientific Experiment Designer:} LangChain, AutoGen, LLM APIs
+\item \textbf{Medical Prescription NLP:} SpaCy, Hugging Face Transformers
+\end{itemize}
 
 \section{Education}
 \vspace{1pt}
 \begin{itemize}
-
-\item{\cventry{[YYYY--YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-Thesis: ``[Thesis Title].'' [Brief description of research focus.]
-}}
-
-\vspace{3pt}
-
-\item{\cventry{[YYYY--YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-[Brief description or key topics.]
-}}
-
+\item{\cventry{Aug 2025--Present}{M.S. Engineering Artificial Intelligence}{Carnegie Mellon University}{}{}{Deep Learning, Agentic AI, ML in Production}}
+\item{\cventry{Dec 2024--Mar 2025}{Applied Data Science Lab (Certificate)}{WorldQuant University}{}{}{}}
+\item{\cventry{2017--2021}{B.S. Applied Computer Technology}{USIU-Africa}{Kenya}{}{}}
 \end{itemize}
 
-% ============================================================
-%     LANGUAGES
-% ============================================================
-
-\section{Languages}
+\section{Certifications, Honors \& Community}
 \vspace{1pt}
 \begin{itemize}
-\item [Language 1] (native), [Language 2] (fluent), [Language 3] (intermediate).
-\end{itemize}
-
-% ============================================================
-%     PUBLICATIONS (optional)
-% ============================================================
-
-\section{Publications}
-\vspace{1pt}
-\begin{itemize}
-\item [Author(s)] ([Year]). [Title]. [Journal/Conference]. \href{[DOI_URL]}{DOI link}
-\end{itemize}
-
-% ============================================================
-%     HONORS AND AWARDS (optional)
-% ============================================================
-
-\section{Honors and Awards}
-\vspace{1pt}
-\begin{itemize}
-\item{\textbf{[Award Name]} -- [Event/Organization] ([Year]).}
-\end{itemize}
-
-% ============================================================
-%     REFERENCES
-% ============================================================
-
-\section{References}
-\vspace{1pt}
-\begin{itemize}
-\item{Available upon request.}
+\item Microsoft Azure AI-100; IBM Python for Data Science; AICE Africa AI; Google Data Foundations
+\item Fellow at Savvy; Merit scholarship; Miss Career Africa Nominee
+\item Community Lead, Women in Data
 \end{itemize}
 
 \end{document}

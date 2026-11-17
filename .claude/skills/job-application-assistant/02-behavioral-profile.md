@@ -1,50 +1,54 @@
 # Behavioral Profile
 
-<!-- SETUP: This file is populated by running /setup -->
-<!-- You can use results from PI, DISC, Myers-Briggs, StrengthsFinder, or a self-assessment -->
-
 ## Overview
-[YOUR_NAME]'s behavioral assessment identifies them as a **[PROFILE_TYPE]** pattern. [1-2 SENTENCE_SUMMARY].
+Whoopie's profile reflects a **builder-educator** pattern: hands-on technical depth combined with community leadership, stakeholder communication, and training. *[Inferred from CV and community roles — review before relying on formal assessment scores.]*
 
 ## Core Behavioral Drives
 
 | Drive | Level | Meaning |
 |-------|-------|---------|
-| [DRIVE_1] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_2] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_3] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_4] | [LEVEL] | [DESCRIPTION] |
+| Technical mastery | High | Deep engagement with ML/NLP systems from data through deployment |
+| Impact through others | High | Teaching, training, and community leadership (GTA, Nice Place Foundation, Women in Data) |
+| Stakeholder translation | High | Bridges technical findings to clinical and cross-functional audiences |
+| Exploratory learning | High | Pursues complex problems ("rabbit holes") — GitHub bio, multi-agent and RAG projects |
 
 ## Strongest Behaviors
-- **[BEHAVIOR_1]:** [DESCRIPTION]
-- **[BEHAVIOR_2]:** [DESCRIPTION]
-- **[BEHAVIOR_3]:** [DESCRIPTION]
+- **Community-driven delivery:** Iterative, inclusive approach in research (GRA health/NLP work) and training roles
+- **Cross-functional communication:** Presents model findings to clinical stakeholders; frontline liaison across distributed facilities
+- **End-to-end ownership:** Builds pipelines, evaluates models, deploys/serves, and monitors — not siloed to one ML phase
 
 ## How You Work Best
-- [ENVIRONMENT_PREFERENCE_1]
-- [ENVIRONMENT_PREFERENCE_2]
-- [ENVIRONMENT_PREFERENCE_3]
+- Roles with clear technical problems and measurable outcomes
+- Teams that value teaching, documentation, and knowledge transfer
+- Autonomy to design experiments and iterate on solutions
+- Mission-driven contexts (health, education, digital inclusion in Africa)
 
 ## Growth Areas (frame positively in applications)
-- **[AREA_1]:** [HOW_TO_FRAME_IT_POSITIVELY]
-- **[AREA_2]:** [HOW_TO_FRAME_IT_POSITIVELY]
+- **Formal senior IC title:** Frame CMU research + Savannah production experience as early-career depth with graduate-level specialization
+- **Geographic/work authorization:** Proactively address sponsorship needs early; emphasize remote delivery track record and relocation flexibility
 
 ## Mapping to Job Posting Language
 
 When a job posting mentions these keywords, it's a **strong behavioral fit**:
-- [KEYWORD_OR_PHRASE_THAT_MATCHES_YOUR_STYLE]
-- [ANOTHER_KEYWORD]
+- End-to-end ML / full ML lifecycle
+- Stakeholder-facing / cross-functional collaboration
+- Mentoring, training, or technical enablement
+- Health tech, digital transformation, or social impact
+- RAG, LLMs, NLP, MLOps, production ML
 
-When a job posting mentions these, flag as **potential friction** (not deal-breaker):
-- [KEYWORD_OR_PHRASE_THAT_MIGHT_CLASH]
-- [ANOTHER_KEYWORD]
+When a job posting mentions these, flag as **potential friction** (not always deal-breaker):
+- Heavy sales quota or pure BD role with minimal building
+- Maintenance-only legacy systems with no greenfield work
+- Strict on-site with no relocation/sponsorship support
+- Unpaid or "equity only" arrangements
 
 ## Management Style Preferences
-- [WHAT_MANAGEMENT_STYLE_WORKS_FOR_YOU]
-- [WHAT_DOESN'T_WORK]
+- Works well with managers who set direction but trust autonomous execution
+- Appreciates feedback loops and access to technical peers
+- Less suited to micromanagement or roles with no path to deepen technical craft
 
 ## Using This in Applications
-- **Cover letters:** [HOW_TO_WEAVE_IN_BEHAVIORAL_STRENGTHS]
-- **CV:** [WHAT_TO_EMPHASIZE]
-- **Interviews:** [WHAT_STAR_EXAMPLES_TO_USE]
-- **Don't overstate:** [WHAT_NOT_TO_CLAIM]
+- **Cover letters:** Lead with problem-solving for the employer; cite health-scale impact and community/inclusion work where relevant
+- **CV:** Emphasize production ML, NLP/RAG, and measurable outcomes (10% reliability, 20% adoption, 93% model accuracy)
+- **Interviews:** Use Savannah stakeholder story, GRA community-driven research, and Omdena collaboration as STAR anchors
+- **Don't overstate:** No formal PI/DISC assessment on file; avoid claiming senior/staff-level years of experience beyond actual roles

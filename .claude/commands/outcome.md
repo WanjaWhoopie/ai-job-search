@@ -85,9 +85,22 @@ Update rules: tick stage checkboxes as they are reached (add the date in parenth
 
 ---
 
-## Step 4: Update the Tracker
+## Step 4: Update the Tracker and Portal Aggregates
 
-Update the matched row's `status` column (e.g. `applied` → `interview` → `offer` → `hired` / `rejected` / `no response` / `offer declined` / `withdrawn`) and append a short dated note to the `notes` column. Never restructure the CSV, reorder rows, or touch other rows.
+Status transitions that have a portal aggregate (interview, offer, rejected, no_response) go through the recording script — it updates the tracker row **and** increments the matching counter in `job_scraper/portal_outcomes.json` (portal derived from the row's `source` URL) in one idempotent call:
+
+```bash
+python scripts/record_application.py --record-outcome --company "<Company>" --role "<Role>" --status <interview|offer|rejected|no_response> --notes "<short dated note>"
+```
+
+Re-running with the same status is a no-op (`"changed": false`) — aggregates are never double-counted.
+
+Two special cases:
+
+- **`ready_for_manual` row the user has now submitted** (e.g. they sent a queued email draft or finished a manual-queue item): run `python scripts/record_application.py --mark-submitted --company "<Company>" --role "<Role>"` — this flips the row to `applied` and increments the portal's `applications` count. Also remove the item from `job_scraper/manual_queue.json` / mark the entry in `job_scraper/email_drafts.json` as `"status": "sent"` if present.
+- **Statuses with no aggregate** (`hired`, `offer declined`, `withdrawn`): update the row's `status` and append a dated note directly, as before.
+
+Never restructure the CSV, reorder rows, or touch other rows.
 
 ---
 

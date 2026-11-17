@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Search</title>
+<style>
+  :root {
+    --paper: #F6F3EC;
+    --ink: #1D1A17;
+    --ink-2: rgba(29, 26, 23, .62);
+    --ink-3: rgba(29, 26, 23, .40);
+    --hair: rgba(29, 26, 23, .14);
+    --card: #FDFBF6;
+    --accent: #E7A15F;
+    --good-bg: #E4EBE2;  --good-ink: #33523D;
+    --warn-bg: #F3E7D3;  --warn-ink: #7A5A28;
+    --bad-bg:  #F0DFDA;  --bad-ink:  #7C3B2E;
+    --info-bg: #E3E8EC;  --info-ink: #3D5361;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--serif); line-height: 1.5;
+    padding: 0 clamp(16px, 5vw, 64px) 96px;
+    max-width: 1080px; margin: 0 auto;
+  }
+  /* soft glow, slowdown-style */
+  .glow {
+    position: fixed; top: 12vh; left: 6vw; width: 260px; height: 260px;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    opacity: .28; filter: blur(18px); pointer-events: none; z-index: 0;
+  }
+  main { position: relative; z-index: 1; }
+
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 0; border-bottom: 1px solid var(--hair);
+  }
+  .wordmark { font-size: 20px; letter-spacing: .35em; font-weight: 400; text-transform: uppercase; }
+
+  .kicker {
+    font-family: var(--sans); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink-2);
+  }
+
+  .hero { padding: 64px 0 40px; }
+  .hero h1 {
+    font-weight: 400; font-size: clamp(28px, 4.5vw, 44px); line-height: 1.25;
+    max-width: 22ch;
+  }
+  .hero em { font-style: italic; }
+  .hero .sub { margin-top: 16px; color: var(--ink-2); font-size: 17px; max-width: 60ch; }
+
+  /* toggle */
+  .toggle {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--sans); font-size: 13px; cursor: pointer;
+    border: 1px solid var(--ink); border-radius: 999px;
+    background: transparent; color: var(--ink); padding: 10px 18px;
+  }
+  .toggle:hover { background: var(--ink); color: var(--paper); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); }
+  .dot.on { background: #4C7A5C; }
+
+  section { padding: 40px 0 8px; }
+  section > h2 {
+    font-weight: 400; font-style: italic; font-size: 26px; margin: 6px 0 20px;
+  }
+  .rule { border: 0; border-top: 1px solid var(--hair); margin-top: 40px; }
+
+  /* stat tiles */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .tile { background: var(--card); border: 1px solid var(--hair); border-radius: 10px; padding: 18px 20px; }
+  .tile .n { font-size: 34px; line-height: 1.1; }
+  .tile .k { margin-top: 6px; }
+
+  /* cards for the manual queue */
+  .cards { display: grid; gap: 12px; }
+  .card {
+    background: var(--card); border: 1px solid var(--hair); border-radius: 10px;
+    padding: 18px 22px; display: grid; gap: 6px;
+  }
+  .card .title { font-size: 19px; }
+  .card .meta { font-family: var(--sans); font-size: 13px; color: var(--ink-2); }
+  .card a { color: inherit; }
+  .card .actions { margin-top: 6px; }
+  .btn {
+    font-family: var(--sans); font-size: 12.5px; cursor: pointer;
+    border: 1px solid var(--ink); border-radius: 999px;
+    background: transparent; color: var(--ink); padding: 7px 16px;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn:disabled { opacity: .45; cursor: default; }
+  .btn.quiet { border-color: var(--hair); color: var(--ink-2); }
+  .btn.quiet:hover { background: var(--bad-bg); color: var(--bad-ink); border-color: var(--bad-bg); }
+
+  table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 13.5px; }
+  th {
+    text-align: left; font-weight: 500; font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-2);
+    padding: 10px 12px 8px; border-bottom: 1px solid var(--hair);
+  }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  td a { color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+
+  .pill {
+    display: inline-block; font-family: var(--sans); font-size: 11.5px;
+    padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+  }
+  .pill.good { background: var(--good-bg); color: var(--good-ink); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-ink); }
+  .pill.bad  { background: var(--bad-bg);  color: var(--bad-ink); }
+  .pill.info { background: var(--info-bg); color: var(--info-ink); }
+  .pill.mute { background: rgba(29,26,23,.07); color: var(--ink-2); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .chip {
+    font-family: var(--sans); font-size: 12px; cursor: pointer;
+    border: 1px solid var(--hair); border-radius: 999px;
+    background: transparent; color: var(--ink-2); padding: 6px 14px;
+  }
+  .chip.active { border-color: var(--ink); color: var(--ink); }
+
+  select {
+    font-family: var(--sans); font-size: 13px; color: var(--ink);
+    background: var(--card); border: 1px solid var(--hair); border-radius: 8px; padding: 8px 12px;
+  }
+  .report {
+    background: var(--card); border: 1px solid var(--hair); border-radius: 10px;
+    padding: 26px 30px; margin-top: 16px; font-size: 15px;
+  }
+  .report h1, .report h2, .report h3 { font-weight: 400; margin: 18px 0 8px; }
+  .report h1 { font-size: 24px; } .report h2 { font-style: italic; font-size: 19px; }
+  .report h3 { font-size: 16px; }
+  .report p, .report li { color: var(--ink-2); margin: 6px 0; }
+  .report table { margin: 10px 0; }
+  .report code { font-size: 12.5px; background: rgba(29,26,23,.06); padding: 1px 5px; border-radius: 4px; }
+  .report pre { background: rgba(29,26,23,.06); padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 12.5px; }
+
+  .empty { color: var(--ink-3); font-style: italic; padding: 8px 0; }
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hair); color: var(--ink-3); font-size: 13px; font-family: var(--sans); }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<main>
+  <header>
+    <div class="wordmark">Job&nbsp;Search</div>
+    <button class="toggle" id="toggle" title="Toggle the nightly scraping pipeline">
+      <span class="dot" id="dot"></span><span id="toggle-label">…</span>
+    </button>
+  </header>
+
+  <div class="hero">
+    <div class="kicker" id="hero-kicker">Pipeline</div>
+    <h1 id="hero"></h1>
+    <p class="sub" id="hero-sub"></p>
+  </div>
+
+  <section>
+    <div class="kicker">At a glance</div>
+    <div class="tiles" id="tiles" style="margin-top:14px"></div>
+  </section>
+  <hr class="rule">
+
+  <section>
+    <div class="kicker">Action needed</div>
+    <h2>Waiting on you</h2>
+    <div class="cards" id="queue"></div>
+    <div id="drafts-block" style="margin-top:26px">
+      <div class="kicker">Email drafts (never auto-sent)</div>
+      <div class="cards" id="drafts" style="margin-top:12px"></div>
+    </div>
+  </section>
+  <hr class="rule">
+
+  <section>
+    <div class="kicker">Latest ranking</div>
+    <h2>Shortlist</h2>
+    <div class="table-wrap"><table id="shortlist"></table></div>
+  </section>
+  <hr class="rule">
+
+  <section>
+    <div class="kicker">Applications</div>
+    <h2>Tracker</h2>
+    <div class="table-wrap"><table id="tracker"></table></div>
+  </section>
+  <hr class="rule">
+
+  <section>
+    <div class="kicker">Which boards work</div>
+    <h2>Portal outcomes</h2>
+    <div class="table-wrap"><table id="portals"></table></div>
+  </section>
+  <hr class="rule">
+
+  <section>
+    <div class="kicker">Everything scraped</div>
+    <h2>Seen jobs</h2>
+    <div class="chips" id="chips"></div>
+    <div class="table-wrap"><table id="seen"></table></div>
+  </section>
+  <hr class="rule">
+
+  <section>
+    <div class="kicker">Nightly runs</div>
+    <h2>Reports</h2>
+    <select id="report-select"></select>
+    <div class="report" id="report"></div>
+  </section>
+
+  <footer>Local only (127.0.0.1). State lives in <code>job_scraper/</code> and <code>job_search_tracker.csv</code>.</footer>
+</main>
+
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const STATUS_CLASS = {
+  applied: "good", hired: "good", offer: "good",
+  ready_for_manual: "warn", ready: "warn", in_progress: "info", interview: "info", new: "info",
+  ranked: "mute", skipped: "mute", expired: "mute", withdrawn: "mute",
+  rejected: "bad", no_response: "bad",
+};
+const pill = s => `<span class="pill ${STATUS_CLASS[s] || "mute"}">${esc(s)}</span>`;
+const link = (url, text) => url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(text)}</a>` : esc(text);
+
+let DATA = null, seenFilter = "all";
+
+async function load() {
+  DATA = await (await fetch("/api/data")).json();
+  render();
+  const reports = DATA.reports.slice().reverse();
+  const sel = document.getElementById("report-select");
+  sel.innerHTML = reports.map(r => `<option value="${esc(r)}">${esc(r.replace("nightly_", "").replace(".md", ""))}</option>`).join("");
+  if (reports.length) showReport(reports[0]); else document.getElementById("report").innerHTML = '<div class="empty">No reports yet.</div>';
+}
+
+function render() {
+  const on = DATA.config.scraping_enabled;
+  document.getElementById("toggle-label").textContent = on ? "Scraping is on — pause it" : "Scraping is off — resume it";
+  document.getElementById("dot").className = "dot" + (on ? " on" : "");
+
+  const c = DATA.counts, waiting = (DATA.manual_queue || []).length + (DATA.email_drafts || []).filter(d => d.status === "draft").length;
+  document.getElementById("hero").innerHTML =
+    `The pipeline has seen <em>${Object.values(c).reduce((a, b) => a + b, 0)}</em> positions, ` +
+    `ranked <em>${c.ranked || 0}</em>, and has <em>${waiting}</em> waiting on your review.`;
+  document.getElementById("hero-sub").textContent = on
+    ? "Nightly run is armed: scrape, rank, apply to the top matches at 22:00, and queue anything it can't submit safely."
+    : "Scraping is paused. Nothing runs at 22:00 until you switch it back on — existing data stays put.";
+  document.getElementById("hero-kicker").textContent = on ? "Pipeline · running nightly" : "Pipeline · paused";
+
+  const applied = DATA.tracker.filter(r => ["applied", "in_progress", "interview", "offer", "hired"].includes(r.status)).length;
+  document.getElementById("tiles").innerHTML = [
+    [Object.values(c).reduce((a, b) => a + b, 0), "Seen"],
+    [c.ranked || 0, "Ranked"],
+    [waiting, "Waiting on you"],
+    [applied, "Applied / live"],
+    [c.expired || 0, "Expired"],
+  ].map(([n, k]) => `<div class="tile"><div class="n num">${n}</div><div class="k kicker">${k}</div></div>`).join("");
+
+  const submitBtn = (company, role) => `<div class="actions">
+    <button class="btn" onclick="resolveApp(this, '/api/mark-submitted', ${esc(JSON.stringify(company))}, ${esc(JSON.stringify(role))})">I submitted this ✓</button>
+    <button class="btn quiet" onclick="resolveApp(this, '/api/dismiss', ${esc(JSON.stringify(company))}, ${esc(JSON.stringify(role))})">Posting closed ✗</button>
+  </div>`;
+
+  document.getElementById("queue").innerHTML = (DATA.manual_queue || []).map(q => `
+    <div class="card">
+      <div class="title">${esc(q.role)} · ${esc(q.company)}</div>
+      <div class="meta">${esc(q.reason)}</div>
+      <div class="meta">${link(q.url, "Open posting ↗")} &nbsp;·&nbsp; ${esc(Object.values(q.prepared || {}).join("  ·  "))}</div>
+      ${submitBtn(q.company, q.role)}
+    </div>`).join("") || '<div class="empty">Nothing queued — all caught up.</div>';
+
+  const drafts = (DATA.email_drafts || []);
+  document.getElementById("drafts").innerHTML = drafts.map(d => `
+    <div class="card">
+      <div class="title">${esc(d.subject)}</div>
+      <div class="meta">to ${esc(d.to)} · ${esc(d.company)} · ${esc(d.date)} · ${pill(d.status || "draft")}</div>
+      <div class="meta">${esc((d.attachments || []).join("  ·  "))}</div>
+      ${d.status === "draft" ? submitBtn(d.company, d.role) : ""}
+    </div>`).join("") || '<div class="empty">No email drafts.</div>';
+
+  const sj = (DATA.shortlist.jobs || []);
+  document.getElementById("shortlist").innerHTML = sj.length ? `
+    <tr><th>#</th><th>Score</th><th>Verdict</th><th>Role</th><th>Company</th><th>Action</th><th>Result</th></tr>` +
+    sj.map(j => `<tr>
+      <td class="num">${esc(j.rank)}</td><td class="num">${esc(j.score)}</td><td>${esc(j.verdict)}</td>
+      <td>${link(j.url, j.title)}</td><td>${esc(j.company)}</td>
+      <td>${pill(j.action)}</td><td>${esc(j.result || "—")}</td></tr>`).join("")
+    : '<tr><td class="empty">No shortlist yet — run the pipeline.</td></tr>';
+
+  document.getElementById("tracker").innerHTML = DATA.tracker.length ? `
+    <tr><th>Date</th><th>Company</th><th>Role</th><th>Status</th><th>Channel</th><th>Notes</th></tr>` +
+    DATA.tracker.slice().reverse().map(r => `<tr>
+      <td class="num">${esc(r.date)}</td><td>${link(r.source, r.company)}</td><td>${esc(r.role)}</td>
+      <td>${pill(r.status)}</td><td>${esc(r.channel)}</td><td>${esc(r.notes)}</td></tr>`).join("")
+    : '<tr><td class="empty">No applications tracked yet.</td></tr>';
+
+  const portals = Object.entries(DATA.portal_outcomes || {}).filter(([, v]) => Object.values(v).some(x => typeof x === "number" && x > 0));
+  document.getElementById("portals").innerHTML = portals.length ? `
+    <tr><th>Portal</th><th>Applications</th><th>Interviews</th><th>Offers</th><th>Rejections</th><th>No response</th></tr>` +
+    portals.map(([k, v]) => `<tr><td>${esc(k)}</td><td class="num">${v.applications}</td><td class="num">${v.interviews}</td>
+      <td class="num">${v.offers}</td><td class="num">${v.rejections}</td><td class="num">${v.no_response}</td></tr>`).join("")
+    : '<tr><td class="empty">No portal activity recorded yet.</td></tr>';
+
+  const statuses = ["all", ...Object.keys(DATA.counts).sort()];
+  document.getElementById("chips").innerHTML = statuses.map(s =>
+    `<button class="chip${s === seenFilter ? " active" : ""}" onclick="setFilter('${esc(s)}')">${esc(s)}${s === "all" ? "" : ` · ${DATA.counts[s]}`}</button>`).join("");
+  const seen = Object.values(DATA.seen)
+    .filter(j => seenFilter === "all" || j.status === seenFilter)
+    .sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || ""));
+  document.getElementById("seen").innerHTML = seen.length ? `
+    <tr><th>First seen</th><th>Role</th><th>Company</th><th>Status</th><th>Score</th></tr>` +
+    seen.map(j => `<tr><td class="num">${esc(j.first_seen)}</td><td>${link(j.url, j.title)}</td>
+      <td>${esc(j.company)}</td><td>${pill(j.status)}</td><td class="num">${esc(j.rank_score ?? "—")}</td></tr>`).join("")
+    : '<tr><td class="empty">Nothing with this status.</td></tr>';
+}
+
+function setFilter(s) { seenFilter = s; render(); }
+
+async function resolveApp(btn, endpoint, company, role) {
+  const original = btn.textContent;
+  btn.disabled = true; btn.textContent = "Recording…";
+  const resp = await fetch(endpoint, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ company, role }),
+  });
+  const r = await resp.json();
+  if (r.ok) { await load(); }  // tracker updated, card disappears
+  else { btn.disabled = false; btn.textContent = original; alert("Could not record: " + (r.error || "unknown error")); }
+}
+
+// minimal markdown renderer for the nightly reports
+function md(src) {
+  const lines = src.split(/\r?\n/); let out = [], inCode = false, inList = false, tbl = [];
+  const inline = s => esc(s)
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  const flushTbl = () => {
+    if (!tbl.length) return;
+    const rows = tbl.filter(r => !/^\s*\|?[\s|:-]+\|?\s*$/.test(r));
+    out.push("<table>" + rows.map((r, i) => "<tr>" + r.replace(/^\||\|$/g, "").split("|")
+      .map(c => `<${i ? "td" : "th"}>${inline(c.trim())}</${i ? "td" : "th"}>`).join("") + "</tr>").join("") + "</table>");
+    tbl = [];
+  };
+  for (const line of lines) {
+    if (line.startsWith("```")) { flushTbl(); out.push(inCode ? "</pre>" : "<pre>"); inCode = !inCode; continue; }
+    if (inCode) { out.push(esc(line)); continue; }
+    if (/^\s*\|/.test(line)) { tbl.push(line); continue; }
+    flushTbl();
+    const h = line.match(/^(#{1,3})\s+(.*)/);
+    if (h) { out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`); continue; }
+    if (/^\s*[-*]\s+/.test(line)) { if (!inList) { out.push("<ul>"); inList = true; } out.push(`<li>${inline(line.replace(/^\s*[-*]\s+/, ""))}</li>`); continue; }
+    if (inList) { out.push("</ul>"); inList = false; }
+    if (line.trim()) out.push(`<p>${inline(line)}</p>`);
+  }
+  flushTbl(); if (inList) out.push("</ul>"); if (inCode) out.push("</pre>");
+  return out.join("\n");
+}
+
+async function showReport(name) {
+  const r = await (await fetch(`/api/report?name=${encodeURIComponent(name)}`)).json();
+  document.getElementById("report").innerHTML = r.markdown ? md(r.markdown) : `<div class="empty">${esc(r.error)}</div>`;
+}
+document.getElementById("report-select").addEventListener("change", e => showReport(e.target.value));
+document.getElementById("toggle").addEventListener("click", async () => {
+  DATA.config = await (await fetch("/api/toggle", { method: "POST" })).json();
+  render();
+});
+
+load();
+</script>
+</body>
+</html>

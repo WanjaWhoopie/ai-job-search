@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "Task",
+      "Agent",
+      "TodoWrite",
+      "Skill(job-application-assistant)",
+      "Skill(job-scraper)",
+      "Bash(bun:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(python scripts/submit_app.py:*)",
+      "Bash(python scripts/record_application.py:*)",
+      "Bash(python salary_lookup.py:*)",
+      "Bash(lualatex:*)",
+      "Bash(xelatex:*)",
+      "Bash(pdftotext:*)",
+      "Bash(cd:*)",
+      "Bash(date:*)",
+      "Bash(ls:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Bash(git:*)",
+      "Bash(rm -rf:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)"
+    ]
+  }
+}

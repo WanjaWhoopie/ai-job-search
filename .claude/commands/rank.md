@@ -14,7 +14,7 @@ Follow these steps **in order**.
 
 - Nothing → rank all jobs with status `new` in `job_scraper/seen_jobs.json`
 - A focus area (e.g. `/rank data science`) → rank only jobs whose title or stored fit-notes match the focus
-- `--all` → re-rank every job that has not been applied to, including previously ranked ones (useful after the profile changes)
+- `--all` → re-rank every job that has not been applied to, including previously ranked ones (useful after the profile changes). Jobs with status `applied` or `ready_for_manual` are terminal and never re-ranked.
 - `--top <N>` → shortlist size (default 5)
 
 ---

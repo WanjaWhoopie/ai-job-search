@@ -1,0 +1,93 @@
+{
+  "_comment": "Updated by /outcome and /scrape. Use source column in job_search_tracker.csv for per-application portal; aggregate counts here to compare board effectiveness.",
+  "portals": {
+    "bamboohr": {
+      "applications": 1,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": "Kasha Data Scientist 2026-07-07"
+    },
+    "linkedin": {
+      "applications": 5,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "wellfound": {
+      "applications": 0,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "remoteok": {
+      "applications": 0,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "weworkremotely": {
+      "applications": 0,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "andela": {
+      "applications": 0,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "devex": {
+      "applications": 0,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "flexjobs": {
+      "applications": 0,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "himalayas": {
+      "applications": 1,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": "ClanX (Conqr AI) Senior Applied AI Engineer queued 2026-07-19 - manual submission required, counts as application once user submits via /outcome"
+    },
+    "remotive": {
+      "applications": 0,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    },
+    "other": {
+      "applications": 1,
+      "interviews": 0,
+      "offers": 0,
+      "rejections": 0,
+      "no_response": 0,
+      "notes": ""
+    }
+  }
+}

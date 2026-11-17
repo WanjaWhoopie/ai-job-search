@@ -195,6 +195,34 @@ Set-Location cover_letters; xelatex cover_<company>_<role>.tex; Set-Location ..
 
 These commands apply to the stock templates (moderncv CV, `cover.cls` cover letter). If you'd rather use your own LaTeX template, run `/add-template` — it captures the template's compile engine, fonts, style rules, and page limit, test-compiles it, and wires it into `/apply`. See the "LaTeX templates" section in the README.
 
+## 8. Optional: Nightly autonomous pipeline (Windows)
+
+Runs scrape → rank → apply → submit unattended every night at 22:00 and writes a morning report.
+
+```powershell
+python -m pip install -r scripts/requirements.txt   # 'requests' for form submission
+.\scripts\install-schedule.ps1                       # register the 22:00 task
+.\scripts\run-pipeline.ps1 -DryRun -Top 1            # test run, nothing submitted
+.\scripts\run-pipeline.ps1                           # same pipeline, manual full run
+```
+
+What it does each night: scrapes new postings (14-day window), ranks them, keeps a top-30 shortlist, runs the full `/apply` drafter-reviewer workflow on the top 5 (score ≥ 60 only), then submits — Greenhouse/Lever forms automatically (2 attempts, then queued for manual), email applications as drafts in `job_scraper/email_drafts.json` (never auto-sent), everything else prepared into `job_scraper/manual_queue.json`.
+
+Where to look each morning:
+- `job_scraper/reports/nightly_<date>.md` — what was shortlisted, applied, or needs your action
+- `job_scraper/email_drafts.json` — email drafts to review and send yourself
+- `/batch-apply --flush-manual` — walk the manual queue and mark items submitted
+
+Notes: the task uses your logged-in session (locked screen is fine; fully logged out = run skipped). Start with `-Top 2` for the first week to watch quality and cost. Site credentials, if ever needed, live in `.env` (see `.env.example`) — read only by the helper scripts, never by the agent. Remove with `.\scripts\install-schedule.ps1 -Uninstall`.
+
+### Dashboard
+
+```powershell
+python scripts/dashboard.py    # then open http://127.0.0.1:8765
+```
+
+A local web page (no dependencies, localhost-only) showing everything the pipeline knows: shortlist, manual queue, email drafts, tracker, portal outcomes, all seen jobs (filterable), and the nightly reports — plus a toggle that pauses/resumes scraping (`job_scraper/config.json`, which `run-pipeline.ps1` checks before doing anything). Each queued application has two buttons: **"I submitted this ✓"** (tracker → applied, portal count bumped) and **"Posting closed ✗"** (tracker + seen_jobs → expired, nothing counted) — both go through `scripts/record_application.py`.
+
 ## Troubleshooting
 
 ### "salary_data.json not found"

@@ -115,11 +115,17 @@ If the user decides to apply to any job, add a row to `job_search_tracker.csv`.
 
 ---
 
+## Headless Mode (used by /nightly)
+
+When invoked from the `/nightly` pipeline: run Steps 0–4 only (skip Step 5 presentation and Step 6), never use AskUserQuestion, always run the top 3 priority categories plus the linkedin-search CLI queries, and return only the counts (new/skipped/total) to the orchestrator. Statuses `applied` and `ready_for_manual` in `seen_jobs.json` are terminal — treat them as already-seen for dedup.
+
+---
+
 ## Important Rules
 
 1. **Never fabricate job postings.** Only present jobs found via actual WebSearch/WebFetch results.
 2. **Respect deduplication.** Always check seen_jobs.json AND job_search_tracker.csv before presenting.
-3. **Focus on configured geographic area.** Skip jobs that require relocation or are clearly outside commute range.
+3. **Focus on candidate's configured market.** Skip jobs that fail location/sponsorship rules in `04-job-evaluation.md` (strict geo-lock with no sponsorship, unpaid roles). For Whoopie: prioritize remote-first and Africa/international-friendly employers; deprioritize Danish-only boards unless requested.
 4. **Only open positions.** Skip postings with expired deadlines or those marked as closed.
 5. **Be efficient with WebFetch.** Don't fetch every search result - use titles and snippets to pre-filter before fetching.
 6. **Parallel searches.** Use the Agent tool or parallel WebSearch calls to speed up the search phase.

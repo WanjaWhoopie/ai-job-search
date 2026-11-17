@@ -105,12 +105,14 @@ Write 5-7 lines that function as an "elevator pitch": a concise, compelling intr
 
 **Create 2-3 profile statement templates for your main role types:**
 
-<!-- SETUP: These are populated based on your background -->
-**For [YOUR_PRIMARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_1]
+**For ML Engineer / AI Engineer roles:**
+> Machine Learning Engineer with hands-on experience building, validating, and deploying production ML systems. Skilled in end-to-end model development from data wrangling and feature engineering through training, evaluation, and serving at scale. Currently deepening expertise in deep learning, agentic AI, and scalable NLP/RAG systems at Carnegie Mellon. Brings health-informatics experience on platforms serving 25M+ users and research on NLP for low-resource African languages.
 
-**For [YOUR_SECONDARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_2]
+**For Data Scientist roles:**
+> Data scientist and ML practitioner with production experience in health analytics, automated trend detection, and stakeholder-facing insights. Combines statistical modeling, ensemble methods, and rigorous validation with strong Python and SQL skills. Track record translating model outputs into adoption and reliability gains for clinical and cross-functional teams.
+
+**For Innovation / Digital Transformation roles:**
+> Applied AI specialist bridging research and production: NLP, LLMs, RAG, and MLOps for real-world systems. Experienced delivering data literacy programs, cross-functional liaison work, and community-driven digital health tools. Combines CMU graduate training in Agentic AI and ML in Production with industry impact in national-scale health platforms.
 
 ### Core Competencies / Skills Section (Best Practice)
 Reorder and emphasize based on the role. Use bold category labels.
